@@ -1,0 +1,480 @@
+
+let connectFour = [[0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0]]
+
+let empty = 0;
+let red = 1;
+let black = 2;
+
+let turnRed = true;
+
+let winBlack = false;
+let winRed = false;
+
+let NW = 0;
+let W = 0;
+let SW = 0;
+let NE = 0;
+let E = 0;
+let SE = 0;
+let S = 0;
+
+
+
+function checkNorthWest (x, y) {
+    if (x >= 1 && y >=1) {
+        if (connectFour[x - 1][y - 1] === 1) {
+            NW++;
+            x--;
+            y--;
+        } else {
+            return;
+        }
+        checkNorthWest(x, y);
+    }
+}
+
+function checkSouthEast(x, y) {
+    if (x <= 4 && y <= 5) {
+        if (connectFour[x + 1][y + 1] === 1) {
+            SE++;
+            x++;
+            y++;
+        } else {
+            return;
+        }
+        checkSouthEast(x, y);
+    }
+}
+
+
+function checkNorthEast(x, y) {
+    if (x >= 1 && y <= 5) {
+        if (connectFour[x - 1][y + 1] === 1) {
+            NE++;
+            x--;
+            y++;
+        } else {
+            return;
+        }
+        checkNorthEast(x, y);
+    }
+}
+
+
+function checkSouthWest(x, y) {
+    if (x <= 4 && y >= 1) {
+        if (connectFour[x+1][y-1] === 1) {
+            SW++;
+            x++;
+            y--;
+        } else {
+            return;
+        }
+        checkSouthWest(x, y);
+    }
+}
+
+
+function checkEast(x, y) {
+    if (y <= 5) {
+        if (connectFour[x][y+1] === 1) {
+            E++;
+            y++;
+        } else {
+            return;
+        }
+        checkEast(x, y);
+    }
+}
+
+function checkWest(x, y) {
+    if (y >= 1) {
+        if (connectFour[x][y-1] === 1) {
+            W++;
+            y--;
+        } else {
+            return;
+        }
+        checkWest(x, y);
+    } 
+}
+
+
+function checkSouth(x, y) {
+     if (x <= 4) {
+        if (connectFour[x+1][y] === 1) {
+            S++;
+            x++;
+        } else {
+            return;
+        }
+        checkSouth(x, y);
+    }
+}
+
+
+function checkAdjacent(x, y) {
+    console.log("x1: ", x);
+    console.log("y1: ", y);
+    checkNorthWest(x, y);
+    checkNorthEast(x, y);
+    checkEast(x, y);
+    checkSouthEast(x, y);
+    checkSouth(x, y);
+    checkSouthWest(x, y);
+    checkWest(x, y);
+
+    checkWin();
+    console.log("winRed: ", winRed);
+
+    reset();
+}
+
+
+function checkWin() {
+    if (NW + SE >= 3 ||
+        S >= 3 ||
+        NE + SW >= 3 ||
+        E + W >= 3) {
+        winRed = true;
+        }
+}
+
+function reset() {
+    NW = 0;
+    W = 0;
+    SW = 0;
+    NE = 0;
+    E = 0;
+    SE = 0;
+    S = 0;
+}
+
+
+
+
+
+
+let NW2 = 0;
+let W2 = 0;
+let SW2 = 0;
+let NE2 = 0;
+let E2 = 0;
+let SE2 = 0;
+let S2 = 0;
+
+
+function checkNorthWest2 (x, y) {
+    if (x >= 1 && y >=1) {
+        if (connectFour[x - 1][y - 1] === 2) {
+            NW2++;
+            x--;
+            y--;
+        } else {
+            return;
+        }
+        checkNorthWest2(x, y);
+    }
+}
+
+function checkSouthEast2(x, y) {
+    if (x <= 4 && y <= 5) {
+        if (connectFour[x + 1][y + 1] === 2) {
+            SE2++;
+            x++;
+            y++;
+        } else {
+            return;
+        }
+        checkSouthEast2(x, y);
+    }
+}
+
+
+function checkNorthEast2(x, y) {
+    if (x >= 1 && y <= 5) {
+        if (connectFour[x - 1][y + 1] === 2) {
+            NE2++;
+            x--;
+            y++;
+        } else {
+            return;
+        }
+        checkNorthEast2(x, y);
+    }
+}
+
+
+function checkSouthWest2(x, y) {
+    if (x <= 4 && y >= 1) {
+        if (connectFour[x+1][y-1] === 2) {
+            SW2++;
+            x++;
+            y--;
+        } else {
+            return;
+        }
+        checkSouthWest2(x, y);
+    }
+}
+
+
+function checkEast2(x, y) {
+    if (y <= 5) {
+        if (connectFour[x][y+1] === 2) {
+            E2++;
+            y++;
+        } else {
+            return;
+        }
+        checkEast2(x, y);
+    }
+}
+
+function checkWest2(x, y) {
+    if (y >= 1) {
+        if (connectFour[x][y-1] === 2) {
+            W2++;
+            y--;
+        } else {
+            return;
+        }
+        checkWest2(x, y);
+    } 
+}
+
+
+function checkSouth2(x, y) {
+     if (x <= 4) {
+        if (connectFour[x+1][y] === 2) {
+            S2++;
+            x++;
+        } else {
+            return;
+        }
+        checkSouth2(x, y);
+    }
+}
+
+
+function checkAdjacent2(x, y) {
+    console.log("x2: ", x);
+    console.log("y2: ", y);
+    checkNorthWest2(x, y);
+    checkNorthEast2(x, y);
+    checkEast2(x, y);
+    checkSouthEast2(x, y);
+    checkSouth2(x, y);
+    checkSouthWest2(x, y);
+    checkWest2(x, y);
+
+    checkWin2();
+    console.log("winBlack: ", winBlack);
+
+    reset2();
+    console.log("NW: ", NW2);
+}
+
+
+function checkWin2() {
+    if (NW2 + SE2 >= 3 ||
+        S2 >= 3 ||
+        NE2 + SW2 >= 3 ||
+        E2 + W2 >= 3) {
+        winBlack = true;
+        }
+}
+
+function reset2() {
+    NW2 = 0;
+    SE2 = 0;
+    S2 = 0;
+    NE2 = 0;
+    SW2 = 0;
+    E2 = 0;
+    W2 = 0;
+}
+
+
+
+
+
+let column1 = 5;
+let column2 = 5;
+let column3 = 5;
+let column4 = 5;
+let column5 = 5;
+let column6 = 5;
+let column7 = 5;
+
+
+
+
+const button1 = document.querySelectorAll('.button1');
+
+button1.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) {
+        if (connectFour[0][0] === 0) {
+            if (turnRed === true) {
+                connectFour[column1][0] = 1;
+                checkAdjacent(column1, 0);
+                document.getElementById(`0${column1}`).style.backgroundColor = "red";
+                column1--;
+                turnRed = false;
+            }   else {
+                connectFour[column1][0] = 2;
+                checkAdjacent2(column1, 0);
+                document.getElementById(`0${column1}`).style.backgroundColor = "black";
+                column1--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
+
+const button2 = document.querySelectorAll('.button2');
+
+button2.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) {   
+        if (connectFour[0][1] === 0) {
+            if (turnRed === true) {
+                connectFour[column2][1] = 1;
+                checkAdjacent(column2, 1);
+                document.getElementById(`1${column2}`).style.backgroundColor = "red";
+                column2--;
+                turnRed = false;
+            }   else {
+                connectFour[column2][1] = 2;
+                checkAdjacent2(column2, 1);
+                document.getElementById(`1${column2}`).style.backgroundColor = "black";
+                column2--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
+const button3 = document.querySelectorAll('.button3');
+
+button3.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) { 
+        if (connectFour[0][2] === 0) {
+            if (turnRed === true) {
+                connectFour[column3][2] = 1;
+                checkAdjacent(column3, 2);
+                document.getElementById(`2${column3}`).style.backgroundColor = "red";
+                column3--;
+                turnRed = false;
+            }   else {
+                connectFour[column3][2] = 2;
+                checkAdjacent2(column3, 2);
+                document.getElementById(`2${column3}`).style.backgroundColor = "black";
+                column3--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
+
+const button4 = document.querySelectorAll('.button4');
+
+button4.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) { 
+        if (connectFour[0][3] === 0) {
+            if (turnRed === true) {
+                connectFour[column4][3] = 1;
+                checkAdjacent(column4, 3);
+                document.getElementById(`3${column4}`).style.backgroundColor = "red";
+                column4--;
+                turnRed = false;
+            }   else {
+                connectFour[column4][3] = 2;
+                checkAdjacent2(column4, 3);
+                document.getElementById(`3${column4}`).style.backgroundColor = "black";
+                column4--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
+const button5 = document.querySelectorAll('.button5');
+
+button5.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) {     
+        if (connectFour[0][4] === 0) {
+            if (turnRed === true) {
+                connectFour[column5][4] = 1;
+                checkAdjacent(column5, 4);
+                document.getElementById(`4${column5}`).style.backgroundColor = "red";
+                column5--;
+                turnRed = false;
+            }   else {
+                connectFour[column5][4] = 2;
+                checkAdjacent2(column5, 4);
+                document.getElementById(`4${column5}`).style.backgroundColor = "black";
+                column5--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
+const button6 = document.querySelectorAll('.button6');
+
+button6.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) {     
+        if (connectFour[0][5] === 0) {
+            if (turnRed === true) {
+                connectFour[column6][5] = 1;
+                checkAdjacent(column6, 5);
+                document.getElementById(`5${column6}`).style.backgroundColor = "red";
+                column6--;
+                turnRed = false;
+            }   else {
+                connectFour[column6][5] = 2;
+                checkAdjacent2(column6, 5);
+                document.getElementById(`5${column6}`).style.backgroundColor = "black";
+                column6--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
+const button7 = document.querySelectorAll('.button7');
+
+button7.forEach(el => el.addEventListener('click', event => {
+    if (winRed === false && winBlack === false) {     
+        if (connectFour[0][6] === 0) {
+            if (turnRed === true) {
+                connectFour[column7][6] = 1;
+                checkAdjacent(column7, 6);
+                document.getElementById(`6${column7}`).style.backgroundColor = "red";
+                column7--;
+                turnRed = false;
+            }   else {
+                connectFour[column7][6] = 2;
+                checkAdjacent2(column7, 6);
+                document.getElementById(`6${column7}`).style.backgroundColor = "black";
+                column7--;
+                turnRed = true;
+            }
+        }
+    }
+}))
+
+
