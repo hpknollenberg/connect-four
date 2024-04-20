@@ -30,3 +30,21 @@
   border-style: solid;
   width: fit-content;
 }
+
+
+#reset {
+  text-align: center;
+  height: fit-content;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+  text-shadow: 1px 1px rgba(255, 105, 180, 0.5);
+  font-size: 1rem;
+  margin-top: 2.5vh;
+}
+
+#reset:hover {
+  cursor: pointer;
+  border: solid;
+  background-color: yellow;
+}

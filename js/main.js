@@ -15,6 +15,9 @@ let turnRed = true;
 let winBlack = false;
 let winRed = false;
 
+let nameRed = "";
+let nameBlack = "";
+
 let NW = 0;
 let W = 0;
 let SW = 0;
@@ -119,8 +122,6 @@ function checkSouth(x, y) {
 
 
 function checkAdjacent(x, y) {
-    console.log("x1: ", x);
-    console.log("y1: ", y);
     checkNorthWest(x, y);
     checkNorthEast(x, y);
     checkEast(x, y);
@@ -130,7 +131,6 @@ function checkAdjacent(x, y) {
     checkWest(x, y);
 
     checkWin();
-    console.log("winRed: ", winRed);
 
     reset();
 }
@@ -142,7 +142,7 @@ function checkWin() {
         NE + SW >= 3 ||
         E + W >= 3) {
         winRed = true;
-        }
+    }
 }
 
 function reset() {
@@ -263,8 +263,6 @@ function checkSouth2(x, y) {
 
 
 function checkAdjacent2(x, y) {
-    console.log("x2: ", x);
-    console.log("y2: ", y);
     checkNorthWest2(x, y);
     checkNorthEast2(x, y);
     checkEast2(x, y);
@@ -274,10 +272,9 @@ function checkAdjacent2(x, y) {
     checkWest2(x, y);
 
     checkWin2();
-    console.log("winBlack: ", winBlack);
 
     reset2();
-    console.log("NW: ", NW2);
+    
 }
 
 
@@ -288,6 +285,14 @@ function checkWin2() {
         E2 + W2 >= 3) {
         winBlack = true;
         }
+
+    if (winBlack === true) { //If a win condition is true
+        if (nameBlack !== "") { //If entered name
+            document.getElementById("message").innerHTML = `${nameBlack.toUpperCase()} WINS` //Display NAME WINS
+        } else { //If no name
+            document.getElementById("message").innerHTML = "BLACK WINS"; //Display Red WINS
+        }
+    }
 }
 
 function reset2() {
@@ -326,12 +331,14 @@ button1.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`0${column1}`).style.backgroundColor = "red";
                 column1--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column1][0] = 2;
                 checkAdjacent2(column1, 0);
                 document.getElementById(`0${column1}`).style.backgroundColor = "black";
                 column1--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
@@ -350,12 +357,14 @@ button2.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`1${column2}`).style.backgroundColor = "red";
                 column2--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column2][1] = 2;
                 checkAdjacent2(column2, 1);
                 document.getElementById(`1${column2}`).style.backgroundColor = "black";
                 column2--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
@@ -373,12 +382,14 @@ button3.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`2${column3}`).style.backgroundColor = "red";
                 column3--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column3][2] = 2;
                 checkAdjacent2(column3, 2);
                 document.getElementById(`2${column3}`).style.backgroundColor = "black";
                 column3--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
@@ -397,12 +408,14 @@ button4.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`3${column4}`).style.backgroundColor = "red";
                 column4--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column4][3] = 2;
                 checkAdjacent2(column4, 3);
                 document.getElementById(`3${column4}`).style.backgroundColor = "black";
                 column4--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
@@ -420,12 +433,14 @@ button5.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`4${column5}`).style.backgroundColor = "red";
                 column5--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column5][4] = 2;
                 checkAdjacent2(column5, 4);
                 document.getElementById(`4${column5}`).style.backgroundColor = "black";
                 column5--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
@@ -443,12 +458,14 @@ button6.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`5${column6}`).style.backgroundColor = "red";
                 column6--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column6][5] = 2;
                 checkAdjacent2(column6, 5);
                 document.getElementById(`5${column6}`).style.backgroundColor = "black";
                 column6--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
@@ -466,15 +483,124 @@ button7.forEach(el => el.addEventListener('click', event => {
                 document.getElementById(`6${column7}`).style.backgroundColor = "red";
                 column7--;
                 turnRed = false;
+                displayNameBlack();
             }   else {
                 connectFour[column7][6] = 2;
                 checkAdjacent2(column7, 6);
                 document.getElementById(`6${column7}`).style.backgroundColor = "black";
                 column7--;
                 turnRed = true;
+                displayNameRed();
             }
         }
     }
 }))
+
+
+
+
+document.getElementById("red-player").addEventListener("input", (e) => {
+    nameRed = e.target.value;
+    if (winRed === false && winBlack === false && turnRed === true) {
+        displayNameRed();
+    }
+})
+
+document.getElementById("black-player").addEventListener("input", (e) => {
+    nameBlack = e.target.value;
+    if (winRed === false && winBlack === false && turnRed === false) {
+        displayNameBlack();
+    }
+})
+
+
+function displayNameBlack() {
+    if (winRed === false && winBlack === false) {
+        if (nameBlack !== "") { //If input is not blank
+            document.getElementById("message").innerHTML = `${nameBlack}'s Turn (Black)` //Display Name's Turn (O)
+        } else { //If input is blank
+            document.getElementById("message").innerHTML = "Black's Turn"; //Display O's Turn
+        }
+    } else if (winRed === true) { //If a win condition is true
+        if (nameRed !== "") { //If entered name
+            document.getElementById("message").innerHTML = `${nameRed.toUpperCase()} WINS` //Display NAME WINS
+        } else { //If no name
+            document.getElementById("message").innerHTML = "RED WINS"; //Display Red WINS
+        }    
+    }
+}
+
+function displayNameRed() {
+    if (winRed === false && winBlack === false) {
+        if (nameRed !== "") {
+            document.getElementById("message").innerHTML = `${nameRed}'s Turn (Red)`
+        } else {
+            document.getElementById("message").innerHTML = "Red's Turn";
+        }
+    } else if (winBlack === true) { //If a win condition is true
+        if (nameBlack !== "") { //If entered name
+            document.getElementById("message").innerHTML = `${nameBlack.toUpperCase()} WINS` //Display NAME WINS
+        } else { //If no name
+            document.getElementById("message").innerHTML = "BLACK WINS"; //Display Red WINS
+        }    
+    }
+}
+
+
+
+document.getElementById("reset").addEventListener("click", resetAll); //RESET BUTTON
+
+function resetAll () {
+    for (let i = 0; i <= 6; i++) {
+        document.getElementById(`${i}0`).style.backgroundColor = "white";
+        document.getElementById(`${i}1`).style.backgroundColor = "white";
+        document.getElementById(`${i}2`).style.backgroundColor = "white";
+        document.getElementById(`${i}3`).style.backgroundColor = "white";
+        document.getElementById(`${i}4`).style.backgroundColor = "white";
+        document.getElementById(`${i}5`).style.backgroundColor = "white";
+    }
+
+    column1 = 5;
+    column2 = 5;
+    column3 = 5;
+    column4 = 5;
+    column5 = 5;
+    column6 = 5;
+    column7 = 5;
+
+    turnRed = true;
+
+    winBlack = false;
+    winRed = false;
+
+    NW = 0;
+    W = 0;
+    SW = 0;
+    NE = 0;
+    E = 0;
+    SE = 0;
+    S = 0;
+
+    NW2 = 0;
+    W2 = 0;
+    SW2 = 0;
+    NE2 = 0;
+    E2 = 0;
+    SE2 = 0;
+    S2 = 0;
+
+    connectFour = [[0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0]]
+
+    displayNameRed();
+    
+}
+
+    
+
 
 
